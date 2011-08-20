@@ -23,10 +23,23 @@ def setup_dependencies(virtualenv):
         ["pip", "install", "-E", virtualenv, "-r", "req.txt"]
     )
 
+def display_activate_warning(virtualenv):
+    if sys.platform == 'win32':
+        activate = "Scripts\\activate.bat"
+        command = ""
+    else:
+        activate = 'bin/activate'
+        command = "source"
+
+    path = os.path.join(virtualenv, activate)
+
+    print "\nYou can now activate the virtual environment by running:\n" \
+            "%s %s\n" % (command, path)
+
 def main(args):
     setup_virtualenv(args.virtualenv)
     setup_dependencies(args.virtualenv)
-
+    display_activate_warning(args.virtualenv)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
