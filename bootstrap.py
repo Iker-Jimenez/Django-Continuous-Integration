@@ -6,13 +6,18 @@ import subprocess
 import argparse
 
 DEFAULT_VIRTUALENV_PATH = "./env"
+DEPENDENCIES = ["pip", "virtualenv"]
+
+def check_dependencies():
+    for dependency in DEPENDENCIES:
+        try:
+            __import__(dependency)
+        except ImportError:
+            print "Dependency missing: %s is not installed" % dependency
+            sys.exit()
+    print "All dependencies found"
 
 def setup_virtualenv(dest_dir):
-    print "   Installing virtualenv"
-    subprocess.call(
-        ["pip", "install", "virtualenv"]
-    )
-
     print "   Setting up new virtualenv in %s" % dest_dir
     subprocess.call(
         ["virtualenv", "--no-site-packages", "--distribute", dest_dir]
@@ -37,6 +42,7 @@ def display_activate_warning(virtualenv):
             "%s %s\n" % (command, path)
 
 def main(args):
+    check_dependencies()
     setup_virtualenv(args.virtualenv)
     setup_dependencies(args.virtualenv)
     display_activate_warning(args.virtualenv)
