@@ -14,7 +14,7 @@ def check_dependencies():
             __import__(dependency)
         except ImportError:
             print "Dependency missing: %s is not installed" % dependency
-            sys.exit()
+            sys.exit(1)
     print "All dependencies found"
 
 def setup_virtualenv(dest_dir):
