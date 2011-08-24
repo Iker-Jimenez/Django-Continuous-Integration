@@ -20,7 +20,7 @@ def setup_virtualenv(dest_dir):
 
 def setup_dependencies(virtualenv):
     subprocess.call(
-        ["pip", "install", "-E", virtualenv, "-r", "req.txt"]
+        (virtualenv + "/bin/pip install -r req.txt").split(' ')
     )
 
 def display_activate_warning(virtualenv):
