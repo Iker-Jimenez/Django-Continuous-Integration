@@ -43,9 +43,12 @@ def display_activate_warning(virtualenv):
 
 def main(args):
     check_dependencies()
-    setup_virtualenv(args.virtualenv)
-    setup_dependencies(args.virtualenv)
-    display_activate_warning(args.virtualenv)
+    if os.path.exists(args.virtualenv):
+        print "Environment seems to be setup at %s, exiting" % args.virtualenv
+    else:
+        setup_virtualenv(args.virtualenv)
+        setup_dependencies(args.virtualenv)
+        display_activate_warning(args.virtualenv)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
