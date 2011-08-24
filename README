@@ -1,1 +1,4 @@
-A small thing to do small stuff, again
+Prerequisites
++ Python 2.6+ installed
++ Pip installed
++ Virtualenv installed
